@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import com.returnorder.main.dto.PaymentCharges;
+import com.returnorder.main.dto.PaymentChargesStatus;
 import com.returnorder.main.dto.ProcessRequest;
 import com.returnorder.main.dto.ProcessResponse;
 
@@ -17,7 +17,7 @@ public interface ComponentClient {
     ProcessResponse processResponseDetails(@RequestBody ProcessRequest processRequestObj ,@RequestHeader(name = "Authorization", required = true) String token);
 
     @PostMapping("/completeProcessing/{requestId}/{cardNumber}/{creditLimit}/{processingCharge}")
-	PaymentCharges statusConfirmation(@PathVariable String requestId, @PathVariable String cardNumber,
+    PaymentChargesStatus statusConfirmation(@PathVariable String requestId, @PathVariable String cardNumber,
 			@PathVariable Integer creditLimit, @PathVariable Integer processingCharge ,@RequestHeader(name = "Authorization", required = true) String token);
 
     

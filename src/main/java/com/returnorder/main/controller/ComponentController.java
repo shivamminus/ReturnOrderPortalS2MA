@@ -1,6 +1,5 @@
 package com.returnorder.main.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.returnorder.main.dto.PaymentCharges;
+import com.returnorder.main.dto.PaymentChargesStatus;
+import com.returnorder.main.dto.PaymentProcessRequest;
 import com.returnorder.main.dto.ProcessRequest;
 import com.returnorder.main.dto.ProcessResponse;
 import com.returnorder.main.service.ComponentService;
@@ -28,6 +28,20 @@ public class ComponentController {
 	public ModelAndView showProcessing() {
 		ModelAndView mv = new ModelAndView("orderDetails");
 		mv.addObject("orderModel", new ProcessRequest());
+		return mv;
+	}
+	
+//	@RequestMapping(value = "/payment-status", method = RequestMethod.GET)
+//	public ModelAndView showProcessedPayment() {
+//		ModelAndView mv = new ModelAndView("paymentStatus");
+//		mv.addObject("paymentModel", new ProcessRequest());
+//		return mv;
+//	}
+
+	@RequestMapping(value = "/payment", method = RequestMethod.POST)
+	public ModelAndView paymentDetails(@ModelAttribute("paymentModel") PaymentProcessRequest paymentProcessRequest) {
+		ModelAndView mv = new ModelAndView("paymentStatus");
+		mv.addObject("paymentModel", paymentProcessRequest);
 		return mv;
 	}
 
@@ -51,18 +65,26 @@ public class ComponentController {
 			ProcessResponse processResponse = componentService.fetchProcessResponseDetails(processRequest, token);
 			
 			System.out.println("*******************************************************************************************");
+			System.out.println(processRequest);
 			System.out.println(processResponse);
 			System.out.println("*******************************************************************************************");
 			mv.addObject("response", processResponse);
-
-			PaymentCharges paymentCharges = componentService.fetchStatusConfirmation(processRequest, processResponse,
-					token);
-			mv.addObject("payment", paymentCharges);
+			mv.addObject("request", processRequest);
+//			PaymentChargesStatus paymentChargesStatus = componentService.fetchStatusConfirmation(processRequest, processResponse,
+//					token);
+//			System.out.println("*******************************************************************************************");
+//
+//			System.out.println(paymentChargesStatus);
+//			System.out.println("*******************************************************************************************");
+//
+//			mv.addObject("payment", paymentChargesStatus);
 
 			mv.setViewName("cart");
 			return mv;
 
 		} catch (Exception e) {
+			System.out.println("======================================================>"+e.getMessage());
+			mv.addObject("error",e.getMessage());
 			mv.setViewName("cart");
 			return mv;
 
