@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.returnorder.main.client.ComponentClient;
 import com.returnorder.main.dto.PaymentChargesStatus;
+import com.returnorder.main.dto.PaymentProcessRequest;
 import com.returnorder.main.dto.ProcessRequest;
 import com.returnorder.main.dto.ProcessResponse;
 
@@ -17,10 +18,10 @@ public class ComponentService {
 		return componentClient.processResponseDetails(processReqObj, token);
 	}
 
-	public PaymentChargesStatus fetchStatusConfirmation(ProcessRequest processRequest, ProcessResponse processResponse,
+	public PaymentChargesStatus fetchStatusConfirmation(PaymentProcessRequest paymentProcessRequest,
 			String token) {
-		PaymentChargesStatus paymentStatus =  componentClient.statusConfirmation(processResponse.getRequestId(), processRequest.getCreditCardNumber(),
-				processRequest.getCardLimit(), processResponse.getProcessingCharge(), token);
+		PaymentChargesStatus paymentStatus =  componentClient.statusConfirmation(paymentProcessRequest.getRequestId(), paymentProcessRequest.getCreditCardNumber(),
+				paymentProcessRequest.getCardLimit(), paymentProcessRequest.getPackagingAndDeliveryCharge(), token);
 		System.out.println("---------------------------------"+paymentStatus);
 		return paymentStatus;
 	}

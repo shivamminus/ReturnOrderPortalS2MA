@@ -25,8 +25,14 @@ public class ComponentController {
 	ComponentService componentService;
 
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	public ModelAndView showProcessing() {
-		ModelAndView mv = new ModelAndView("orderDetails");
+	public ModelAndView showProcessing(HttpSession request) {
+		String token = (String) request.getAttribute("token");
+		ModelAndView mv;
+		if (token == null) {
+			mv = new ModelAndView("login");
+			return mv;
+		}
+		mv = new ModelAndView("orderDetails");
 		mv.addObject("orderModel", new ProcessRequest());
 		return mv;
 	}
@@ -39,8 +45,18 @@ public class ComponentController {
 //	}
 
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public ModelAndView paymentDetails(@ModelAttribute("paymentModel") PaymentProcessRequest paymentProcessRequest) {
-		ModelAndView mv = new ModelAndView("paymentStatus");
+	public ModelAndView paymentDetails(@ModelAttribute("paymentModel") PaymentProcessRequest paymentProcessRequest, HttpSession request) {
+		String token = (String) request.getAttribute("token");
+		ModelAndView mv;
+		if (token == null) {
+			mv = new ModelAndView("login");
+			return mv;
+		}
+		PaymentChargesStatus paymentChargesStatus = componentService.fetchStatusConfirmation(paymentProcessRequest,token);
+		System.out.println("*******************************************************************************************");
+		System.out.println(paymentChargesStatus);
+		mv = new ModelAndView("paymentStatus");
+		mv.addObject("payment", paymentChargesStatus);
 		mv.addObject("paymentModel", paymentProcessRequest);
 		return mv;
 	}
@@ -70,14 +86,7 @@ public class ComponentController {
 			System.out.println("*******************************************************************************************");
 			mv.addObject("response", processResponse);
 			mv.addObject("request", processRequest);
-//			PaymentChargesStatus paymentChargesStatus = componentService.fetchStatusConfirmation(processRequest, processResponse,
-//					token);
-//			System.out.println("*******************************************************************************************");
-//
-//			System.out.println(paymentChargesStatus);
-//			System.out.println("*******************************************************************************************");
-//
-//			mv.addObject("payment", paymentChargesStatus);
+
 
 			mv.setViewName("cart");
 			return mv;
