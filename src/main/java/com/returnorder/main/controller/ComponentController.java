@@ -32,11 +32,11 @@ public class ComponentController {
 			mv = new ModelAndView("login");
 			return mv;
 		}
-		mv = new ModelAndView("orderDetails");
+		mv = new ModelAndView("order-details");
 		mv.addObject("orderModel", new ProcessRequest());
 		return mv;
 	}
-	
+
 //	@RequestMapping(value = "/payment-status", method = RequestMethod.GET)
 //	public ModelAndView showProcessedPayment() {
 //		ModelAndView mv = new ModelAndView("paymentStatus");
@@ -45,15 +45,24 @@ public class ComponentController {
 //	}
 
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public ModelAndView paymentDetails(@ModelAttribute("paymentModel") PaymentProcessRequest paymentProcessRequest, HttpSession request) {
+	public ModelAndView paymentDetails(@ModelAttribute("paymentModel") PaymentProcessRequest paymentProcessRequest,
+			HttpSession request) {
 		String token = (String) request.getAttribute("token");
 		ModelAndView mv;
 		if (token == null) {
 			mv = new ModelAndView("login");
 			return mv;
 		}
-		PaymentChargesStatus paymentChargesStatus = componentService.fetchStatusConfirmation(paymentProcessRequest,token);
-		System.out.println("*******************************************************************************************");
+
+		PaymentChargesStatus paymentChargesStatus = componentService.fetchStatusConfirmation(paymentProcessRequest,
+				token);
+		if (paymentChargesStatus == null) {
+			mv = new ModelAndView("cart");
+			mv.addObject("error", "Error in Transaction");
+			return mv;
+		}
+		System.out
+				.println("*******************************************************************************************");
 		System.out.println(paymentChargesStatus);
 		mv = new ModelAndView("paymentStatus");
 		mv.addObject("payment", paymentChargesStatus);
@@ -72,28 +81,34 @@ public class ComponentController {
 			return mv;
 		}
 
-		mv = new ModelAndView("orderDetails");
+		mv = new ModelAndView("order-details");
 		if (result.hasErrors()) {
 			return mv;
 		}
 
 		try {
 			ProcessResponse processResponse = componentService.fetchProcessResponseDetails(processRequest, token);
-			
-			System.out.println("*******************************************************************************************");
+			if (processResponse == null) {
+				mv = new ModelAndView("order-details");
+				mv.addObject("error", "Error in Getting Details...");
+				return mv;
+			}
+
+			System.out.println(
+					"*******************************************************************************************");
 			System.out.println(processRequest);
 			System.out.println(processResponse);
-			System.out.println("*******************************************************************************************");
+			System.out.println(
+					"*******************************************************************************************");
 			mv.addObject("response", processResponse);
 			mv.addObject("request", processRequest);
-
 
 			mv.setViewName("cart");
 			return mv;
 
 		} catch (Exception e) {
-			System.out.println("======================================================>"+e.getMessage());
-			mv.addObject("error",e.getMessage());
+			System.out.println("======================================================>" + e.getMessage());
+			mv.addObject("error", e.getMessage());
 			mv.setViewName("cart");
 			return mv;
 

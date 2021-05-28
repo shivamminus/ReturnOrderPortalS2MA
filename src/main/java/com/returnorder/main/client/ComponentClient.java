@@ -18,7 +18,7 @@ public interface ComponentClient {
 
     @PostMapping("/completeProcessing/{requestId}/{cardNumber}/{creditLimit}/{processingCharge}")
     PaymentChargesStatus statusConfirmation(@PathVariable String requestId, @PathVariable String cardNumber,
-			@PathVariable Integer creditLimit, @PathVariable double processingCharge ,@RequestHeader(name = "Authorization", required = true) String token);
+			@PathVariable Integer creditLimit, @PathVariable Integer processingCharge ,@RequestHeader(name = "Authorization", required = true) String token);
 
     
 }

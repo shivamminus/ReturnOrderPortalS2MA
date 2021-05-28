@@ -4,19 +4,19 @@ public class PaymentProcessRequest {
 
 	private String requestId;
 	private String creditCardNumber;
-	private Double packagingAndDeliveryCharge;
+	private Integer processingCharge;
 	private Integer cardLimit;
 
 	public PaymentProcessRequest() {
 		super();
 	}
 
-	public PaymentProcessRequest(String requestId, String creditCardNumber, Double packagingAndDeliveryCharge,
+	public PaymentProcessRequest(String requestId, String creditCardNumber, Integer processingCharge,
 			Integer cardLimit) {
 		super();
 		this.requestId = requestId;
 		this.creditCardNumber = creditCardNumber;
-		this.packagingAndDeliveryCharge = packagingAndDeliveryCharge;
+		this.processingCharge = processingCharge;
 		this.cardLimit = cardLimit;
 	}
 
@@ -36,12 +36,12 @@ public class PaymentProcessRequest {
 		this.creditCardNumber = creditCardNumber;
 	}
 
-	public Double getPackagingAndDeliveryCharge() {
-		return packagingAndDeliveryCharge;
+	public Integer getProcessingCharge() {
+		return processingCharge;
 	}
 
-	public void setPackagingAndDeliveryCharge(Double packagingAndDeliveryCharge) {
-		this.packagingAndDeliveryCharge = packagingAndDeliveryCharge;
+	public void setProcessingCharge(Integer processingCharge) {
+		this.processingCharge = processingCharge;
 	}
 
 	public Integer getCardLimit() {
@@ -55,7 +55,7 @@ public class PaymentProcessRequest {
 	@Override
 	public String toString() {
 		return "PaymentProcessRequest [requestId=" + requestId + ", creditCardNumber=" + creditCardNumber
-				+ ", packagingAndDeliveryCharge=" + packagingAndDeliveryCharge + ", cardLimit=" + cardLimit + "]";
+				+ ", processingCharge=" + processingCharge + ", cardLimit=" + cardLimit + "]";
 	}
 
 }

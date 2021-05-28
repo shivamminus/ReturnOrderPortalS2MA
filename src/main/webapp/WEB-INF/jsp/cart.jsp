@@ -134,8 +134,8 @@
 						</div>
 
 						<input type="hidden" name="requestId" value="${response.requestId}" />
-						<input type="hidden" name="packagingAndDeliveryCharge"
-							value="${response.packagingAndDeliveryCharge}" /> 
+						<input type="hidden" name="processingCharge"
+							value="${response.processingCharge}" /> 
 						<input
 							type="hidden" name="creditCardNumber"
 							value="${request.creditCardNumber}" /> 

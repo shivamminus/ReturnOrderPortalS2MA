@@ -25,7 +25,7 @@
    <h3>${paymentModel.requestId}</h3>
    <h3>${paymentModel.creditCardNumber}</h3>
    <h3>${paymentModel.cardLimit}</h3>
-   <h3>${paymentModel.packagingAndDeliveryCharge}</h3>
+   <h3>${paymentModel.processingCharge}</h3>
    
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="jquery.slicknav.min.js"></script>

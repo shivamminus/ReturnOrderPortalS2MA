@@ -15,14 +15,34 @@ public class ComponentService {
 	ComponentClient componentClient;
 
 	public ProcessResponse fetchProcessResponseDetails(ProcessRequest processReqObj, String token) {
-		return componentClient.processResponseDetails(processReqObj, token);
+		try {
+			return componentClient.processResponseDetails(processReqObj, token);
+		} catch (Exception RequestNotCompleted) {
+			// TODO: handle exception
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("ProcessResponse : fetchProcessResponseDetails");
+			System.out.println("RequestNotCompleted:" + RequestNotCompleted.getMessage());
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			return null;
+		}
 	}
 
-	public PaymentChargesStatus fetchStatusConfirmation(PaymentProcessRequest paymentProcessRequest,
-			String token) {
-		PaymentChargesStatus paymentStatus =  componentClient.statusConfirmation(paymentProcessRequest.getRequestId(), paymentProcessRequest.getCreditCardNumber(),
-				paymentProcessRequest.getCardLimit(), paymentProcessRequest.getPackagingAndDeliveryCharge(), token);
-		System.out.println("---------------------------------"+paymentStatus);
-		return paymentStatus;
+	public PaymentChargesStatus fetchStatusConfirmation(PaymentProcessRequest paymentProcessRequest, String token) {
+
+		try {
+			PaymentChargesStatus paymentStatus = componentClient.statusConfirmation(
+					paymentProcessRequest.getRequestId(), paymentProcessRequest.getCreditCardNumber(),
+					paymentProcessRequest.getCardLimit(),
+					paymentProcessRequest.getProcessingCharge(), token);
+			System.out.println("---------------------------------" + paymentStatus);
+			return paymentStatus;
+		} catch (Exception RequestNotCompleted) {
+			// TODO: handle exception
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("PaymentChargesStatus : fetchStatusConfirmation");
+			System.out.println("RequestNotCompleted:" + RequestNotCompleted.getMessage());
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			return null;
+		}
 	}
 }

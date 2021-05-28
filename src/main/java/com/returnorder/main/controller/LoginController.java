@@ -29,8 +29,6 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 
-
-	 
 	@GetMapping("/hello")
 	public String helloProcessing() {
 		return "ok";
@@ -42,21 +40,20 @@ public class LoginController {
 		String token = (String) request.getAttribute("token");
 		ModelAndView mv;
 		if (token != null) {
-			mv = new ModelAndView("login");
+			mv = new ModelAndView("order");
 			return mv;
 		}
-		mv = new ModelAndView("order");
+		mv = new ModelAndView("login");
 		mv.addObject("loginModel", new AuthenticationRequest());
 		return mv;
 	}
-	
+
 	@GetMapping(value = "/image")
 	public @ResponseBody byte[] getImage() throws IOException {
-	    InputStream in = getClass()
-	      .getResourceAsStream("/com/returnorder/main/webapp/WEB-INF/jsp/css/ROM.png");
-	    return IOUtils.toByteArray(in);
+		InputStream in = getClass().getResourceAsStream("/com/returnorder/main/webapp/WEB-INF/jsp/css/ROM.png");
+		return IOUtils.toByteArray(in);
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView performLogin(@ModelAttribute("loginModel") AuthenticationRequest credentials, BindingResult result,
 			HttpSession request) throws FeignException {
@@ -64,13 +61,12 @@ public class LoginController {
 
 		AuthenticationResponse token = null;
 
-		try {
+		//		Token Credential verification
 			token = loginService.getAuthToken(credentials);
-		} catch (Exception e) {
-			mv.addObject("error", "Invalid Credentials");
-			return mv;
-		}
-
+			if (token == null) {
+				mv.addObject("error", "Error Authenticating user... Verify Your Credentials!");
+				return mv;
+			}
 		request.setAttribute("token", "Bearer " + token.getJwtAuthToken());
 		request.setAttribute("user", token.getUserName());
 

@@ -222,6 +222,7 @@
 	                            </div>
                             </spring:bind>
                         </div>
+                        <div>${error}</div>
                         <!-- <div class="form-group">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
