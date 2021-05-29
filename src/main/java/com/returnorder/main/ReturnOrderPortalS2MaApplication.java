@@ -9,6 +9,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class ReturnOrderPortalS2MaApplication {
 
 	public static void main(String[] args) {
+
+        System.setProperty("server.connection-timeout","60000");
 		SpringApplication.run(ReturnOrderPortalS2MaApplication.class, args);
 	}
 
