@@ -1,5 +1,12 @@
 package com.returnorder.main.dto;
 
+
+
+/*
+ * This DTO Class will contain object of Validating DAO
+ * which will return true/false for corresponding result
+*/
+
 public class ValidatingDAO {
 
 	private boolean validStatus;

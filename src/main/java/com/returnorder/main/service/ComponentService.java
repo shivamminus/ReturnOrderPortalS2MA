@@ -8,21 +8,35 @@ import com.returnorder.main.dto.PaymentChargesStatus;
 import com.returnorder.main.dto.PaymentProcessRequest;
 import com.returnorder.main.dto.ProcessRequest;
 import com.returnorder.main.dto.ProcessResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+
+/*
+ * This is Service class to Component controller 
+ * which will fetch data from Other microservices
+*/
 @Service
 public class ComponentService {
+	private static Logger logger = LoggerFactory.getLogger(ComponentService.class);
+	
 	@Autowired
 	ComponentClient componentClient;
 
+	
+	/*
+	 * fetchProcessResponseDetails will call  using Feign
+	 *  to receive details of product
+	*/
 	public ProcessResponse fetchProcessResponseDetails(ProcessRequest processReqObj, String token) {
 		try {
 			return componentClient.processResponseDetails(processReqObj, token);
 		} catch (Exception RequestNotCompleted) {
 			// TODO: handle exception
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("ProcessResponse : fetchProcessResponseDetails");
-			System.out.println("RequestNotCompleted:" + RequestNotCompleted.getMessage());
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.debug("ProcessResponse : fetchProcessResponseDetails");
+			logger.debug("RequestNotCompleted:" + RequestNotCompleted.getMessage());
+			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			return null;
 		}
 	}
@@ -34,14 +48,14 @@ public class ComponentService {
 					paymentProcessRequest.getRequestId(), paymentProcessRequest.getCreditCardNumber(),
 					paymentProcessRequest.getCardLimit(),
 					paymentProcessRequest.getProcessingCharge(), token);
-			System.out.println("---------------------------------" + paymentStatus);
+			logger.debug("---------------------------------" + paymentStatus);
 			return paymentStatus;
 		} catch (Exception RequestNotCompleted) {
 			// TODO: handle exception
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("PaymentChargesStatus : fetchStatusConfirmation");
-			System.out.println("RequestNotCompleted:" + RequestNotCompleted.getMessage());
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.debug("PaymentChargesStatus : fetchStatusConfirmation");
+			logger.debug("RequestNotCompleted:" + RequestNotCompleted.getMessage());
+			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			return null;
 		}
 	}

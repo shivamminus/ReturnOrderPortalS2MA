@@ -1,5 +1,9 @@
 package com.returnorder.main.dto;
 
+
+/*
+ * This DTO Class will contain object of Payment Process Request
+*/
 public class PaymentProcessRequest {
 
 	private String requestId;

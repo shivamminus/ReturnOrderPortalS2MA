@@ -1,4 +1,8 @@
 package com.returnorder.main.dto;
+
+/*
+ * Payment Charge will return Operation Successful/ Not Successful
+*/
 public class PaymentChargesStatus {
 
 	private String  status;

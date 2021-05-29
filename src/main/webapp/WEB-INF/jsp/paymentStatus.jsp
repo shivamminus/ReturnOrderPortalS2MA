@@ -144,7 +144,7 @@
                                  <tr>
                                     <td></td>
                                     <td>
-                                       <button type="button" href="/order" id="submitButton">BACK TO ORDER</button>
+                                       <a type="button" href="/order" id="submitButton">BACK TO ORDER</a>
                                     </td>
                                  </tr>
                               </tbody>

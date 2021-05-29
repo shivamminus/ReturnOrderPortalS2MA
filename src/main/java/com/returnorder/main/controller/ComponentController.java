@@ -2,6 +2,8 @@ package com.returnorder.main.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,16 +22,20 @@ import feign.FeignException;
 
 @Controller
 public class ComponentController {
+	private static Logger logger = LoggerFactory.getLogger(ComponentController.class);
 
 	@Autowired
 	ComponentService componentService;
-
+	
+	/*
+	 * This Method will render order.jsp based on authenticated token
+	*/
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public ModelAndView showProcessing(HttpSession request) {
 		String token = (String) request.getAttribute("token");
 		ModelAndView mv;
 		if (token == null) {
-			mv = new ModelAndView("login");
+			mv = new ModelAndView("redirect:/login");
 			return mv;
 		}
 		mv = new ModelAndView("order-details");
@@ -44,13 +50,17 @@ public class ComponentController {
 //		return mv;
 //	}
 
+	
+	/*
+	 * This Method will render payment.jsp based on inputs from order.jsp
+	*/
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
 	public ModelAndView paymentDetails(@ModelAttribute("paymentModel") PaymentProcessRequest paymentProcessRequest,
 			HttpSession request) {
 		String token = (String) request.getAttribute("token");
 		ModelAndView mv;
 		if (token == null) {
-			mv = new ModelAndView("login");
+			mv = new ModelAndView("redirect:/login");
 			return mv;
 		}
 
@@ -63,13 +73,17 @@ public class ComponentController {
 		}
 		System.out
 				.println("*******************************************************************************************");
-		System.out.println(paymentChargesStatus);
+		logger.debug(paymentChargesStatus.toString());
 		mv = new ModelAndView("paymentStatus");
 		mv.addObject("payment", paymentChargesStatus);
 		mv.addObject("paymentModel", paymentProcessRequest);
 		return mv;
 	}
-
+	
+	
+	/*
+	 * This Method will post data to cart.jsp along with calls to Process the order
+	*/
 	@RequestMapping(value = "/order", method = RequestMethod.POST)
 	public ModelAndView displayOrderPage(@ModelAttribute("orderModel") ProcessRequest processRequest,
 			BindingResult result, HttpSession request) throws FeignException {
@@ -77,7 +91,7 @@ public class ComponentController {
 		String token = (String) request.getAttribute("token");
 		ModelAndView mv;
 		if (token == null) {
-			mv = new ModelAndView("login");
+			mv = new ModelAndView("redirect:/login");
 			return mv;
 		}
 
@@ -94,20 +108,21 @@ public class ComponentController {
 				return mv;
 			}
 
-			System.out.println(
+			logger.info(
 					"*******************************************************************************************");
-			System.out.println(processRequest);
-			System.out.println(processResponse);
-			System.out.println(
+			logger.info(processRequest.toString());
+			logger.info(processResponse.toString());
+			logger.info(
 					"*******************************************************************************************");
-			mv.addObject("response", processResponse);
 			mv.addObject("request", processRequest);
+			mv.addObject("response", processResponse);
+			
 
 			mv.setViewName("cart");
 			return mv;
 
 		} catch (Exception e) {
-			System.out.println("======================================================>" + e.getMessage());
+			logger.error("======================================================>" + e.getMessage());
 			mv.addObject("error", e.getMessage());
 			mv.setViewName("cart");
 			return mv;

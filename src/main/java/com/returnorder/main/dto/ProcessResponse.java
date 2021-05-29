@@ -1,5 +1,11 @@
 package com.returnorder.main.dto;
 
+
+
+/*
+ * This DTO Class will contain object of Process Response
+*/
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ProcessResponse {

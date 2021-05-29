@@ -6,6 +6,8 @@ import java.io.InputStream;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,7 @@ import feign.FeignException;
 @Controller
 public class LoginController {
 
+
 	@Autowired
 	LoginService loginService;
 
@@ -33,20 +36,27 @@ public class LoginController {
 	public String helloProcessing() {
 		return "ok";
 	}
-
+	
+	/*
+	 * This will render Login Page for user to enter Login Credentials 
+	*/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpSession request) {
 		String token = (String) request.getAttribute("token");
 		ModelAndView mv;
 		if (token != null) {
-			mv = new ModelAndView("order");
+			mv = new ModelAndView("redirect:/order");
 			return mv;
 		}
 		mv = new ModelAndView("login");
 		mv.addObject("loginModel", new AuthenticationRequest());
 		return mv;
 	}
-
+	
+	
+	/*
+	 * This will Invalidate the Logged In user's session 
+	*/
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView endSession(HttpSession request) {
 		request.invalidate();
@@ -56,12 +66,10 @@ public class LoginController {
 		return mv;
 	}
 
-	@GetMapping(value = "/image")
-	public @ResponseBody byte[] getImage() throws IOException {
-		InputStream in = getClass().getResourceAsStream("/com/returnorder/main/webapp/WEB-INF/jsp/css/ROM.png");
-		return IOUtils.toByteArray(in);
-	}
-
+	/*
+	 * This will Post data to create Token 
+	 * for authenticated user
+	*/
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView performLogin(@ModelAttribute("loginModel") AuthenticationRequest credentials,
 			BindingResult result, HttpSession request) throws FeignException {

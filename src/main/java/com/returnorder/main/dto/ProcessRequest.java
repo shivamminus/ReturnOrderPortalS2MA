@@ -1,5 +1,11 @@
 package com.returnorder.main.dto;
 
+
+
+
+/*
+ * This DTO Class will contain object of Process Request
+*/
 public class ProcessRequest {
 
 	private String userName;
