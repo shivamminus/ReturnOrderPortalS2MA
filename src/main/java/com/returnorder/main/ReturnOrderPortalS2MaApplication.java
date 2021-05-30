@@ -19,7 +19,7 @@ public class ReturnOrderPortalS2MaApplication {
 		
 		logger.info("Return Order Portal Started");
 
-        System.setProperty("server.connection-timeout","120000");
+//        System.setProperty("server.connection-timeout","120000");
 		SpringApplication.run(ReturnOrderPortalS2MaApplication.class, args);
 	}
 

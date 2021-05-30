@@ -365,6 +365,11 @@
       </style>
    </head>
    <body id="bodyComponent">
+   <script>
+   	document.getElementById("submitButton").addEventListener("click", function(event){
+  event.preventDefault()
+});
+   </script>
       <table id="mainTable">
          <tbody>
             <tr>

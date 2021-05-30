@@ -68,6 +68,7 @@ public class ComponentController {
 				token);
 		if (paymentChargesStatus == null) {
 			mv = new ModelAndView("cart");
+			logger.error("Error in Transaction");
 			mv.addObject("error", "Error in Transaction");
 			return mv;
 		}

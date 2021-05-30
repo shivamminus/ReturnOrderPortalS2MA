@@ -9,7 +9,7 @@ import com.returnorder.main.dto.AuthenticationResponse;
 
 
 
-@FeignClient(name = "AUTH-SERVICE", url = "http://localhost:9090/auth")
+@FeignClient(name = "AUTH-SERVICE", url = "http://localhost:8081/auth")
 public interface LoginClient {
 
 	@PostMapping(value = "/login")

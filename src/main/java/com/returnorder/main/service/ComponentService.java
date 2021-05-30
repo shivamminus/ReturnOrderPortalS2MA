@@ -30,13 +30,15 @@ public class ComponentService {
 	*/
 	public ProcessResponse fetchProcessResponseDetails(ProcessRequest processReqObj, String token) {
 		try {
-			return componentClient.processResponseDetails(processReqObj, token);
+			ProcessResponse processResponse = componentClient.processResponseDetails(processReqObj, token);
+			logger.info("here it is "+processResponse);
+			return processResponse;
 		} catch (Exception RequestNotCompleted) {
 			// TODO: handle exception
-			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			logger.debug("ProcessResponse : fetchProcessResponseDetails");
-			logger.debug("RequestNotCompleted:" + RequestNotCompleted.getMessage());
-			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.error("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.error("ProcessResponse : fetchProcessResponseDetails");
+			logger.error("RequestNotCompleted:" + RequestNotCompleted.getMessage());
+			logger.error("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			return null;
 		}
 	}
@@ -48,14 +50,14 @@ public class ComponentService {
 					paymentProcessRequest.getRequestId(), paymentProcessRequest.getCreditCardNumber(),
 					paymentProcessRequest.getCardLimit(),
 					paymentProcessRequest.getProcessingCharge(), token);
-			logger.debug("---------------------------------" + paymentStatus);
+			logger.info("---------------------------------" + paymentStatus);
 			return paymentStatus;
 		} catch (Exception RequestNotCompleted) {
 			// TODO: handle exception
-			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			logger.debug("PaymentChargesStatus : fetchStatusConfirmation");
-			logger.debug("RequestNotCompleted:" + RequestNotCompleted.getMessage());
-			logger.debug("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.info("PaymentChargesStatus : fetchStatusConfirmation");
+			logger.info("RequestNotCompleted:" + RequestNotCompleted.getMessage());
+			logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			return null;
 		}
 	}

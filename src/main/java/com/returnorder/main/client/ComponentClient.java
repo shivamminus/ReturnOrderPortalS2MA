@@ -11,7 +11,7 @@ import com.returnorder.main.dto.ProcessRequest;
 import com.returnorder.main.dto.ProcessResponse;
 
 
-@FeignClient(name = "COMPONENT-SERVICE", url = "http://localhost:9090/componentservice")
+@FeignClient(name = "COMPONENT-SERVICE", url = "http://localhost:8084/componentservice")
 public interface ComponentClient {
     @PostMapping("/ProcessDetail")
     ProcessResponse processResponseDetails(@RequestBody ProcessRequest processRequestObj ,@RequestHeader(name = "Authorization", required = true) String token);
