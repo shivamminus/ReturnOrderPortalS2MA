@@ -30,27 +30,29 @@
          .mainDiv {
          padding: 2rem 1rem;
          margin-bottom: 2rem;
-         background-color: #1A2226;
+         /* background: white; */
          border-radius: 0.3rem;
-         color: aliceblue;
+         /* color: white; */
+         background: white;
          border-radius: 15px;
-         opacity: 85%;
+         /* opacity: 85%; */
          margin-top: 100px;
+         width: 1100px;
          }
          #heading {
-         color: #0DB8DE;
+         color: black;
          font-weight: bold;
          font-size: 42px;
          padding-bottom: 50px;
          }
          table {
-         width: 700px;
+         width: 1000px;
          font-size: 25px;
          }
          label {
          font-size: 27px;
-         color: #27EF9F;
-         font-family: Inconsolata;
+         color: black;
+         font-family: Roboto;
          display: block;
          margin-bottom: 5px;
          font-weight: bold;
@@ -65,17 +67,126 @@
          font-size: 25px;
          border: none;
          box-shadow: none;
+         border-radius: 10px;
          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+         /* padding: 10px 10px 10px 10px; */
          }
+
+         .aboutUs,
+        .logOut {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+
+        }
+
+        .navbarFixed {
+            position: fixed;
+            overflow: hidden;
+            z-index: 50;
+            background: black;
+
+        }
+        #submitButton {
+            left: 24%;
+            transform: translate(-50%, -50%);
+            color: #222D32;
+            text-decoration: none;
+            display: inline-block;
+            font-family: Roboto;
+            text-transform: uppercase;
+            border: 2px solid#27EF9F;
+            transition: 0.02s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+            width: 430px;
+            margin-top: 20px;
+
+        }
+
+        #submitButton::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 100%;
+            bottom: 0;
+            background: whitesmoke;
+            transition: 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+            z-index: -1;
+            
+        }
+
+        #submitButton::after {
+            content: "";
+            display: inline-block;
+            background-image: url("https://image.flaticon.com/icons/png/128/109/109617.png");
+            /* background: white; */
+            position: absolute;
+            top: 0;
+            left: calc(100% - 3em);
+            right: 3em;
+            bottom: 0;
+            background-size: 1.5em;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: right 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+        }
+
+
+        #submitButton:hover::before {
+            left: calc(100% - 3em);
+            right: 0;
+            transition: 0.3s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+        }
+
+        #submitButton:hover::after {
+            right: 0;
+            transition: right 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+        }
+
+
+
       </style>
    </head>
    <body>
-      <div id="particles-js"></div>
-      <script src="particles.js"></script>
-      <script src="app.js"></script>
+    
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <img src="https://trello-attachments.s3.amazonaws.com/60afcdd60446864934b83005/496x503/ebd357883d23eb3c14f0afe8609989f0/ROM.png"
+          style="width: 50px; height: 50px;" alt="">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <a class="nav-link aboutUs" href="#">
+                      <i class="fa fa-info-circle" aria-hidden="true" style="margin-left: 15px;"></i>
+                      About Us </a>
+              </li>
+
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+              <a class="nav-link logOut" href="/logout">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                  Logout</a>
+          </form>
+
+      </div>
+  </nav>
+
+
+
+    <!-- Navbar ends -->
+
+
+    
       <!-- form -->
       <div class="container">
-         <div class="row justify-content-md-center">
+         <div class="row">
             <div class="col-md-8">
                <div class="mainDiv">
                   <span class="display-8" id="heading">Your Order Summary</span>
@@ -165,18 +276,21 @@
                                  </tr>
                                  <input type="hidden" name="requestId" value="${response.requestId}" />
                                  <input type="hidden" name="processingCharge"
-                                    value="${response.processingCharge}" /> 
+                                    value="${response.processingCharge}" />
                                  <input
                                     type="hidden" name="creditCardNumber"
-                                    value="${request.creditCardNumber}" /> 
+                                    value="${request.creditCardNumber}" />
                                  <input type="hidden"
                                     name="cardLimit" value="${request.cardLimit}" />
                                  <!-- Alldiv ends -->
-                                 <h2>${error}</h2>
+                                  <h2>${error}</h2> 
                                  <tr>
                                     <td></td>
                                     <td>
-                                       <button type="submit" id="submitButton">PROCESS PAYMENT</button>
+                                       <!-- <button type="submit" id="submitButton"></button> -->
+                                       <button class="btn" type="submit" id="submitButton">
+                                        <i class="fa fa-lock"></i> PROCESS PAYMENT
+                                    </button>
                                     </td>
                                  </tr>
                               </tbody>

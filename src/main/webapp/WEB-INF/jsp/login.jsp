@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> -->
 <!doctype html>
 <html lang="en">
    <head>
@@ -25,9 +25,12 @@
          .login-box {
          margin-top: 200px;
          height: auto;
-         background: #1A2226;
+         /* background: #1A2226; */
+         background: white;
+         border-radius: 10px;
+
          text-align: center;
-         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+         box-shadow: 0 3px 6px whitesmoke, 0 3px 6px whitesmoke;
          /* border: 1px dotted #27EF9F; */
          }
          .login-key {
@@ -53,28 +56,28 @@
          text-align: left;
          }
          input[type=text] {
-         background-color: #1A2226;
+         background-color: white;
          border: none;
          border-bottom: 2px solid #0DB8DE;
          border-top: 0px;
          border-radius: 0px;
-         font-weight: bold;
+         font-weight: normal;
          outline: 0;
          margin-bottom: 20px;
          padding-left: 0px;
-         color: #ECF0F5;
+         color: black;
          }
          input[type=password] {
-         background-color: #1A2226;
+         background-color: white;
          border: none;
          border-bottom: 2px solid #0DB8DE;
          border-top: 0px;
          border-radius: 0px;
-         font-weight: bold;
+         font-weight: normal;
          outline: 0;
          padding-left: 0px;
          margin-bottom: 20px;
-         color: #ECF0F5;
+         color: black;
          }
          .form-group {
          margin-bottom: 40px;
@@ -86,8 +89,9 @@
          box-shadow: none;
          border-bottom: 2px solid #0DB8DE;
          outline: 0;
-         background-color: #1A2226;
-         color: #ECF0F5;
+         background-color: white;
+         color: black;
+         
          }
          input:focus {
          outline: none;
