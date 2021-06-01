@@ -156,16 +156,16 @@
                      action="/login">
                      <spring:bind path="userName">
                         <div class="form-group ">
-                           <label for="userName">Username</label>
+                           <label for="userName" accesskey="U"><U>U</U>sername</label>
                            <form:input path="userName" type="text"
                               class="form-control ${status.error ? 'is-invalid' : ''}"
                               id="userName" placeholder="Username" />
                            <form:errors path="userName" class="invalid-feedback" />
                         </div>
                      </spring:bind>
-                     <spring:bind path="password">
+                     <spring:bind path="password" >
                         <div class="form-group ">
-                           <label for="password">Password</label>
+                           <label for="password" accesskey="P"><U>P</U>assword</label>
                            <form:input path="password" type="password"
                               class="form-control ${status.error ? 'is-invalid' : ''}"
                               id="password" placeholder="Password" />
@@ -177,8 +177,8 @@
                            <!-- Error Message -->
                         </div>
                         <div class="col-lg-6 login-btm login-button">
-                           <button type="submit" class="btn btn-outline-primary"
-                              style="font-size: 25px;">LOGIN</button>
+                           <button type="submit" accesskey="l"  class="btn btn-outline-primary"
+                              style="font-size: 25px;"><U>L</U>OGIN</button>
                         </div>
                      </div>
                   </form:form>

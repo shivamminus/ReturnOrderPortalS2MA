@@ -288,9 +288,8 @@
                                     <td></td>
                                     <td>
                                        <!-- <button type="submit" id="submitButton"></button> -->
-                                       <button class="btn" type="submit" id="submitButton">
-                                        <i class="fa fa-lock"></i> PROCESS PAYMENT
-                                    </button>
+                                       <button class="btn" type="submit" accesskey="P"  id="submitButton">
+                                        <i class="fa fa-lock"></i> <U>P</U>AY AMOUNT</button>
                                     </td>
                                  </tr>
                               </tbody>

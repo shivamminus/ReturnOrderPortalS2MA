@@ -49,9 +49,10 @@ body {
 	/* color: aliceblue; */
 	border-radius: 15px;
 	/* opacity: 85%; */
-	margin-top: 200px;
+	margin-top: 80px;
 	width: 900px;
 	height: auto;
+	margin-left: 100px;
 }
 
 #heading {
@@ -106,10 +107,8 @@ label {
 }
 
 .navbarFixed {
-	position: fixed;
-	overflow: hidden;
-	z-index: 50;
-	background: black;
+	position: sticky;
+
 }
 </style>
 </head>
@@ -119,7 +118,7 @@ label {
 
 
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbarFixed">
 		<img
 			src="https://trello-attachments.s3.amazonaws.com/60afcdd60446864934b83005/496x503/ebd357883d23eb3c14f0afe8609989f0/ROM.png"
 			style="width: 50px; height: 50px;" alt="">
@@ -149,7 +148,7 @@ label {
 	<!-- Navbar ends -->
 	<!-- form -->
 	<div class="container">
-		<div class="row justify-content-md-center">
+		<div class="row">
 			<div class="col-md-8">
 				<div class="mainDiv">
 					<span class="display-8" id="heading">Your Payment Summary</span> <span
