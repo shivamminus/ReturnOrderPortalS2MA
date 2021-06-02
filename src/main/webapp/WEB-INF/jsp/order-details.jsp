@@ -716,8 +716,8 @@
                                         <tr>
                                             <table>
                                                 <tr>
-                                                    <button class="btn" type="submit" id="submitButton">
-                                                        <i class="fa fa-lock"></i> submit
+                                                    <button class="btn" type="submit" accesskey="S" id="submitButton">
+                                                        <i class="fa fa-lock"></i><U>s</U>ubmit
                                                     </button>
 
                                                     <!-- <a href="#">Submit</a> -->
