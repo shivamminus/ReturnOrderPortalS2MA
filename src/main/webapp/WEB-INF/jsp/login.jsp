@@ -159,7 +159,7 @@
                            <label for="userName" accesskey="U"><U>U</U>sername</label>
                            <form:input path="userName" type="text"
                               class="form-control ${status.error ? 'is-invalid' : ''}"
-                              id="userName" placeholder="Username" />
+                              id="userName" placeholder="Enter Username" />
                            <form:errors path="userName" class="invalid-feedback" />
                         </div>
                      </spring:bind>
@@ -168,7 +168,7 @@
                            <label for="password" accesskey="P"><U>P</U>assword</label>
                            <form:input path="password" type="password"
                               class="form-control ${status.error ? 'is-invalid' : ''}"
-                              id="password" placeholder="Password" />
+                              id="password" placeholder="Enter Password" />
                            <form:errors path="password" class="invalid-feedback" />
                         </div>
                      </spring:bind>
